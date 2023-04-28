@@ -1,5 +1,7 @@
 # AngularTypedForms
 
+The purpose of this application is to provide developers with an exercise to learn Typed Forms in Angular.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
 ## Development server
