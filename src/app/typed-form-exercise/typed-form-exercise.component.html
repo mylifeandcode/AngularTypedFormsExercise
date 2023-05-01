@@ -1,4 +1,23 @@
 <div class="content">
-  <p>typed-form-exercise works!</p>
+  <h3>Typed Forms Exercise</h3>
+  <p>In this component, create a typed FormGroup to submit information about new customers.</p>
+  <p>The <i>CustomerService</i> has an <i>addCustomer()</i> method which uses a parameter of type <i>AddCustomerCommand</i>.</p>
+  <p>Using the HTML elements below, create a typed form group and use it to populate the command and make the service call.</p>
+
+  <form>
+    <label for="firstName">First Name</label><input type="text" id="firstName">
+    <label for="lastName">Last Name</label><input type="text" id="lastName"><br />
+    <label for="address1">Address 1</label><input type="text" id="address1" class="address"><br />
+    <label for="address2">Address 2</label><input type="text" id="address1" class="address"><br />
+    <label for="city">City</label><input type="text" id="city"> <label for="State">State</label> <input type="text" id="state" class="state">  <label for="postalCode">Zip</label> <input type="text" id="postalCode" class="postalCode">
+  </form>
+
+  <p>
+    <button [disabled]="saving" (click)="submitForm()" class="submit">Submit</button>
+  </p>
+
+  <p *ngIf="saving">
+    Saving...
+  </p>
 </div>
 
