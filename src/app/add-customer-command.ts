@@ -7,7 +7,7 @@ export class AddCustomerCommand {
   public state: string;
   public postalCode: string;
   public emailAddress: string;
-  public phoneNumber: number;
+  public phoneNumber: string;
   public phoneExtension?: number;
   public birthDate: Date;
 
@@ -19,7 +19,7 @@ export class AddCustomerCommand {
     this.state = '';
     this.postalCode = '';
     this.emailAddress = '';
-    this.phoneNumber = 0;
+    this.phoneNumber = '';
     this.birthDate = new Date();
   }
 }
