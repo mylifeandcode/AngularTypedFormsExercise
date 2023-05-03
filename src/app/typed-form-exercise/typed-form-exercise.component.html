@@ -4,22 +4,47 @@
   <p>The <i>CustomerService</i> has an <i>addCustomer()</i> method which uses a parameter of type <i>AddCustomerCommand</i>.</p>
   <p>Using the HTML elements below, create a typed form group and use it to populate the command and make the service call.</p>
 
-  <form>
-    <label for="firstName">First Name</label><input type="text" id="firstName">
-    <label for="lastName">Last Name</label><input type="text" id="lastName"><br />
-    <label for="address1">Address 1</label><input type="text" id="address1" class="address"><br />
-    <label for="address2">Address 2</label><input type="text" id="address1" class="address"><br />
-    <label for="city">City</label><input type="text" id="city"> <label for="State">State</label> <input type="text" id="state" class="state">  <label for="postalCode">Zip</label> <input type="text" id="postalCode" class="postal-code"><br />
-    <label for="email">Email</label><input type="text" id="email" class="email"><br />
-    <label for="phone">Phone</label><input type="string" id="phone" class="phone"><label for="phoneExt">Ext</label><input type="number" id="phoneExt" class="phone-ext">
+  <form [formGroup]="customerForm">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" formControlName="firstName" required>
+    
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" formControlName="lastName" required><br />
+    
+    <label for="address1">Address 1</label>
+    <input type="text" id="address1" formControlName="address1" class="address" required><br />
+
+    <label for="address2">Address 2</label>
+    <input type="text" id="address1" formControlName="address2" class="address"><br />
+
+    <label for="city">City</label>
+    <input type="text" id="city" formControlName="city" required> 
+    
+    <label for="State">State</label> 
+    <input type="text" id="state" formControlName="state" class="state" required>  
+    
+    <label for="postalCode">Zip</label> 
+    <input type="text" id="postalCode" formControlName="postalCode" class="postal-code" required><br />
+    
+    <label for="email">Email</label>
+    <input type="text" id="email" formControlName="emailAddress" class="email" required><br />
+    
+    <label for="phone">Phone</label>
+    <input type="string" id="phone" formControlName="phone" class="phone" required="">
+    
+    <label for="phoneExt">Ext</label>
+    <input type="number" id="phoneExt" formControlName="phoneExt" class="phone-ext">
   </form>
 
   <p>
-    <button [disabled]="saving" (click)="submitForm()" class="submit">Submit</button>
+    <button [disabled]="saving || customerForm.invalid" (click)="submitForm()" class="submit">Submit</button>
   </p>
 
   <p *ngIf="saving">
     Saving...
+  </p>
+  <p *ngIf="customerForm.touched && customerForm.invalid">
+    Please correct the issues above to submit.
   </p>
 </div>
 

@@ -42,3 +42,12 @@ form {
 .phone-ext {
   width: 50px;
 }
+
+.error {
+  border-color: red;
+  border-style: solid;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
