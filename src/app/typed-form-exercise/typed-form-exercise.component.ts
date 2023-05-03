@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CustomerService } from '../customer.service';
 import { AddCustomerCommand } from '../add-customer-command';
-import { finalize } from 'rxjs';
+import { catchError, finalize } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface ICustomerForm {
@@ -35,10 +35,16 @@ export class TypedFormExerciseComponent {
 
   public submitForm(): void {
     this.saving = true;
+    const command = this.getAddCustomerCommand();
     this._customerService
-      .addCustomer(new AddCustomerCommand())
-      .pipe(finalize(() => this.saving = false))
-      .subscribe((id: number) => window.alert(id));
+      .addCustomer(command)
+      .pipe(
+        catchError((error: string) => { 
+          window.alert('ERROR: ' + error); 
+          throw error;
+        }),
+        finalize(() => this.saving = false))
+      .subscribe((id: number) => window.alert("Customer saved. New ID id " + id));
   }
 
   private buildForm(formBuilder: FormBuilder): FormGroup<ICustomerForm> {
@@ -59,6 +65,22 @@ export class TypedFormExerciseComponent {
 
   private getAddCustomerCommand(): AddCustomerCommand {
     const command = new AddCustomerCommand();
+    command.firstName = this.customerForm.controls.firstName.value;
+    command.lastName = this.customerForm.controls.lastName.value;
+    command.address1 = this.customerForm.controls.address1.value;
+
+    if (this.customerForm.controls.address2.value)
+      command.address2 = this.customerForm.controls.address2.value;
+
+    command.city = this.customerForm.controls.city.value;
+    command.state = this.customerForm.controls.state.value;
+    command.postalCode = this.customerForm.controls.postalCode.value;
+    command.emailAddress = this.customerForm.controls.emailAddress.value;
+    command.phoneNumber = this.customerForm.controls.phone.value;
+
+    if (this.customerForm.controls.phoneExt.value)
+      command.phoneExtension = this.customerForm.controls.phoneExt.value;
+
     return command;
   }
 
