@@ -9,7 +9,6 @@ export class AddCustomerCommand {
   public emailAddress: string;
   public phoneNumber: string;
   public phoneExtension?: number;
-  public birthDate: Date;
 
   constructor() {
     this.firstName = '';
@@ -20,6 +19,5 @@ export class AddCustomerCommand {
     this.postalCode = '';
     this.emailAddress = '';
     this.phoneNumber = '';
-    this.birthDate = new Date();
   }
 }
